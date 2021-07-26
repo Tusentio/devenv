@@ -85,7 +85,7 @@ async function cloneRepos() {
 }
 
 async function npmInstall() {
-    loglevel.info(`Installing dependencies...`);
+    loglevel.info(`Installing dependencies...\r\n`);
     console.group();
 
     const promises = [];
