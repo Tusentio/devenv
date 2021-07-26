@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /** @format */
 
 if (require.main === module) {
