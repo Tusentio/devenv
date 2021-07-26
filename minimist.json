@@ -1,0 +1,42 @@
+{
+    "--": true,
+    "string": ["default-pattern", "repos", "shell", "log-level"],
+    "boolean": [
+        "help",
+        "setup",
+        "start",
+        "start-in-background",
+        "start-detached",
+        "force-install",
+        "force-copy",
+        "clone",
+        "install",
+        "configure"
+    ],
+    "alias": {
+        "default-pattern": "defaultPattern",
+        "depth": "d",
+        "log-level": ["debug-level", "level"],
+        "start-in-background": ["b", "background"],
+        "start-detached": "detached",
+        "force-install": ["f", "forceInstall"],
+        "force-copy": ["F", "forceCopy"],
+        "clone": "c",
+        "install": "i",
+        "configure": ["C", "config"],
+        "help": "?"
+    },
+    "default": {
+        "default-pattern": "(?:\\.|^)default(\\.|$)|^sample-",
+        "depth": 9007199254740991,
+        "repos": "repos.txt",
+        "log-level": "info",
+        "start-in-background": false,
+        "start-detached": false,
+        "force-install": false,
+        "force-copy": false,
+        "clone": true,
+        "install": true,
+        "configure": true
+    }
+}
