@@ -1,6 +1,6 @@
 {
     "name": "@tusent.io/devenv",
-    "version": "1.0.0",
+    "version": "1.0.0-pre.1",
     "license": "UNLICENSED",
     "author": "Keve1227 <killenlillen02@gmail.com>",
     "main": "./bin/devenv.js",
