@@ -231,6 +231,8 @@ async function start() {
                     .map((arg) => arg.replace(/(?:\+\s*)?\$0(?:\s*\+)?/g, $path.resolve(dir))),
             ]).join(" ");
 
+            console.log(command);
+
             promises.push(
                 exec(
                     command,
@@ -277,7 +279,7 @@ function escapeCommandArgs(args) {
         ? (arg) => arg.replace(/(["^])/g, "^$1")
         : (arg) => arg.replace(/(["'\\])/g, "\\$1");
 
-    return args.map((arg) => escape(arg).replace(/(\s*)/g, '"$1"'));
+    return args.map((arg) => escape(arg).replace(/(\s+)/g, '"$1"'));
 }
 
 /**
