@@ -241,10 +241,12 @@ async function start() {
                     },
                     (error, message) => {
                         if (error) {
-                            return loglevel.error(`[${dir}] ` + chalk.redBright`${error}`);
+                            return loglevel.error(
+                                chalk.cyan`[${dir}] ` + chalk.redBright`${error}`
+                            );
                         }
 
-                        loglevel.debug(chalk.dim`[${dir}] ${message}`);
+                        loglevel.debug(chalk.cyan`[${dir}] ` + message);
                     }
                 )
                     .then(() => {
