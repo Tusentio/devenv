@@ -231,8 +231,6 @@ async function start() {
                     .map((arg) => arg.replace(/(?:\+\s*)?\$0(?:\s*\+)?/g, $path.resolve(dir))),
             ]).join(" ");
 
-            console.log(command);
-
             promises.push(
                 exec(
                     command,
