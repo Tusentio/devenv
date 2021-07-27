@@ -1,5 +1,5 @@
 
-devenv 1.0.0-pre.1
+devenv 1.0.0-pre.2
 ------------------
 
   Usage: devenv [cmd] [options] [-- ...]
@@ -48,7 +48,7 @@ devenv 1.0.0-pre.1
     --force-install                             Force npm to run on a package even if it's missing a package lock-file.
       -f
 
-    --foce-copy                                 Copy default files even when overriding existing files.
+    --force-copy                                Copy default files even when overriding existing files.
       -F
 
     --clone                                     Clone repositories.
