@@ -1,0 +1,64 @@
+
+devenv 1.0.0-pre.1
+------------------
+
+  Usage: devenv [cmd] [options] [-- ...]
+
+  Default Options: --clone --install --configure
+
+  Commands:
+
+    setup                                       Set up the development environment.
+      --setup
+
+    start                                       Start all npm packages in the folder hierarchy. (Respects .gitignore)
+      --start
+      Usage: devenv start -- pm2 start node -- $0+/.
+      Default --: npm start
+      Notes:
+        (+ )$0( +) is replaced by the absolute path to the package but is seldom needed since it is already set as the current working directory ("./").
+
+ -> help                                        Show help.
+      -?, --help
+
+  Options:
+
+    --default-pattern                           A regular expression that matches the names of default files. (Respects .gitignore)
+      Default: (?:\.|^)default(\.|$)|^sample-
+
+    --repos                                     The path to the repos.txt* file
+      Default: ./repos.txt
+
+    --shell                                     The path to the shell that is to be used. For Windows this would default to "cmd.exe".
+
+    --log-level                                 The logging level. trace|debug|info|warn|error
+      --debug-level, --level
+      Default: info
+
+    --depth                                     The maximum depth at which files will be searched for.
+      -d
+      Default: 9007199254740991
+
+    --start-in-background                       Whether the packages should be started in the current console.
+      -b, --background
+
+    --start-detached                            Whether the packages should be started detached from this process.
+      --detached
+
+    --force-install                             Force npm to run on a package even if it's missing a package lock-file.
+      -f
+
+    --foce-copy                                 Copy default files even when overriding existing files.
+      -F
+
+    --clone                                     Clone repositories.
+      -c
+
+    --install                                   Install dependencies.
+      -i
+
+    --configure                                 Copy default files.
+      -C, --config
+
+
+  Refer to the source code.

@@ -31,7 +31,7 @@ async function main() {
     };
 
     if (cmds.help || (!cmds.start && !cmds.setup)) {
-        const help = await fs.promises.readFile($path.join(__dirname, "..", "help.md"), "utf-8");
+        const help = await fs.promises.readFile($path.join(__dirname, "..", "help.txt"), "utf-8");
         return process.stdout.write(help);
     }
 
