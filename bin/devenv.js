@@ -223,13 +223,13 @@ async function start() {
 
         if (name === "package.json") {
             const dir = $path.dirname(file);
-            const command = [
+            const command = escapeCommandArgs([
                 args[0],
                 ...args
                     .slice(1)
                     // Replace "$0" with the directory path
                     .map((arg) => arg.replace(/(?:\+\s*)?\$0(?:\s*\+)?/g, $path.resolve(dir))),
-            ].join(" ");
+            ]).join(" ");
 
             promises.push(
                 exec(
@@ -266,6 +266,18 @@ async function start() {
 
     console.groupEnd();
     loglevel.info(`\r\n`);
+}
+
+function escapeCommandArgs(args) {
+    const windowsLike = argv.shell
+        ? argv.shell.toLowerCase().includes("cmd") // Bodge
+        : process.platform === "win32";
+
+    const escape = windowsLike
+        ? (arg) => arg.replace(/(["^])/g, "^$1")
+        : (arg) => arg.replace(/(["'\\])/g, "\\$1");
+
+    return args.map((arg) => escape(arg).replace(/(\s*)/g, '"$1"'));
 }
 
 /**
