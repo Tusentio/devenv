@@ -1,8 +1,8 @@
 
-devenv 1.0.0-pre.2
+devenv 1.0.0-pre.3
 ------------------
 
-  Usage: devenv [cmd] [options] [-- ...]
+  Usage: devenv [cmd] [options] [-- <args>]
 
   Default Options: --clone --install --configure
 
