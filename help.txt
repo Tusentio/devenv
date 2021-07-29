@@ -2,7 +2,7 @@
 devenv 1.0.0-pre.4
 ------------------
 
-  Usage: devenv [cmd] [options] [-- ...]
+  Usage: devenv [cmd] [options] [-- <args>]
 
   Default Options: --clone --install --configure
 
