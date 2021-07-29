@@ -95,6 +95,10 @@ async function npmInstall() {
         const name = $path.basename(file);
         const dir = $path.dirname(file);
 
+        if (dir === ".") {
+            continue;
+        }
+
         if (name === "package.json") {
             if (!packages[dir]) {
                 packages[dir] = false;
