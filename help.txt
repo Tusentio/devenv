@@ -42,9 +42,6 @@ devenv 1.0.0-pre.2
     --start-in-background                       Whether the packages should be started in the current console.
       -b, --background
 
-    --start-detached                            Whether the packages should be started detached from this process.
-      --detached
-
     --force-install                             Force npm to run on a package even if it's missing a package lock-file.
       -f
 
