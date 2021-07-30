@@ -1,0 +1,8 @@
+[
+    { "event": "exit", "exit": false },
+    { "event": "SIGINT", "exit": true },
+    { "event": "SIGUSR1", "exit": true },
+    { "event": "SIGUSR2", "exit": true },
+    { "event": "uncaughtException", "exit": true },
+    { "event": "unhandledRejection", "exit": true }
+]

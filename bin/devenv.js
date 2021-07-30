@@ -3,9 +3,16 @@
 
 if (require.main === module) {
     process.nextTick(main);
+
+    require("../onexit.json").forEach(({ event, exit }) =>
+        process.once(event, exitHandler.bind(this, exit))
+    );
 } else {
     throw new Error("This module cannot be loaded as an import/require.");
 }
+
+/** @type {Map<number, child_process.ChildProcess>} */
+const _cprocs = new Map();
 
 const fs = require("fs");
 const $path = require("path");
@@ -16,6 +23,7 @@ const simpleGit = require("simple-git");
 const Gitignore = require("gitignore-fs").default;
 const minimist = require("minimist");
 
+// @ts-ignore
 const git = simpleGit();
 const gitignore = new Gitignore();
 
@@ -53,6 +61,20 @@ async function main() {
 
     if (cmds.start) {
         await start();
+    }
+}
+
+function exitHandler(exit, code) {
+    for (const c of _cprocs.values()) {
+        _cprocs.delete(c.pid);
+
+        if (!c.killed) {
+            c.kill("SIGTERM");
+        }
+    }
+
+    if (exit) {
+        process.exit(code);
     }
 }
 
@@ -300,6 +322,9 @@ async function exec(command, options, logger) {
     await new Promise(process.nextTick);
 
     const child = child_process.exec(command, options);
+
+    child.on("spawn", () => _cprocs.set(child.pid, child));
+    child.on("exit", () => _cprocs.delete(child.pid));
 
     child.stdout.on("data", (data) => logger?.call?.(globalThis, null, data));
     child.stderr.on("data", (data) => logger?.call?.(globalThis, data, null));
