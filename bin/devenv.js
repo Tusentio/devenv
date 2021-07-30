@@ -268,7 +268,7 @@ async function start() {
                     {
                         cwd: $path.resolve(dir),
                         shell: argv.shell || true,
-                        windowsHide: argv.background,
+                        windowsHide: false,
                     },
                     (error, message) => {
                         if (error) {
