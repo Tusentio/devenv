@@ -187,10 +187,15 @@ async function installConfigs() {
 
     for await (const file of crawlGitPath(".", argv.depth)) {
         const name = $path.basename(file);
+        const dir = $path.dirname(file);
+
+        if (dir === ".") {
+            continue;
+        }
+
         const match = matchReplace(name, regexp);
 
         if (match) {
-            const dir = $path.dirname(file);
             const dst = $path.join(dir, match);
 
             if (!argv.forceCopy && fs.existsSync(dst)) {
