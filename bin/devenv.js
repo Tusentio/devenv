@@ -2,11 +2,31 @@
 /** @format */
 
 if (require.main === module) {
-    process.nextTick(main);
+    (async () => {
+        await new Promise(process.nextTick);
 
-    require("../onexit.json").forEach(({ event, exit }) =>
-        process.once(event, exitHandler.bind(this, exit))
-    );
+        // Register exit handlers
+        require("../onexit.json").forEach(({ event, exit }) =>
+            process.once(event, cleanup.bind(this, exit))
+        );
+
+        const isExitCommand = Set.prototype.has.bind(new Set(["exit", "stop", "quit"]));
+
+        // Listen for exit command
+        const rl = require("readline")
+            .createInterface({ input: process.stdin })
+            .on("line", (line) => {
+                if (line.toLowerCase().split(/\W+/).some(isExitCommand)) {
+                    rl.close();
+                    cleanup();
+                }
+            });
+
+        await main();
+
+        rl.close();
+        process.exit(0);
+    })();
 } else {
     throw new Error("This module cannot be loaded as an import/require.");
 }
@@ -64,12 +84,12 @@ async function main() {
     }
 }
 
-function exitHandler(exit, code) {
+function cleanup(exit, code) {
     for (const c of _cprocs.values()) {
         _cprocs.delete(c.pid);
 
         if (!c.killed) {
-            c.kill("SIGTERM");
+            kill(c.pid);
         }
     }
 
@@ -338,6 +358,19 @@ async function exec(command, options, logger) {
             return resolve();
         });
     });
+}
+
+function kill(pid) {
+    if (process.platform === "win32") {
+        child_process.execSync(
+            escapeCommandArgs(["TASKKILL", "/T", "/F", "/PID", `${pid}`]).join(" "),
+            {
+                stdio: ["ignore", "ignore", "inherit"],
+            }
+        );
+    } else {
+        process.kill(-pid);
+    }
 }
 
 function matchReplace(string, regexp) {

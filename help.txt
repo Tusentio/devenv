@@ -55,4 +55,6 @@ devenv 1.0.0-pre.4
       -C, --config
 
 
+  Type some variation of "exit", "stop" or "quit" to exit the application safely.
+
   Refer to the source code.
