@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "commonJS",
+        "target": "es2020",
+        "checkJs": true,
+        "resolveJsonModule": true
+    },
+    "exclude": ["node_modules"]
+}
