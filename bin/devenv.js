@@ -398,15 +398,19 @@ async function* crawlGitPath(path, depth) {
 
         for (const dirent of dirents) {
             const direntPath = $path.join(path, dirent.name);
-            const ignoredBright = await gitignore.ignores(direntPath);
+            const ignored = await gitignore.ignores(direntPath);
 
-            if (ignoredBright) {
+            if (ignored) {
                 continue;
             }
 
             if (dirent.isFile()) {
                 yield direntPath;
             } else {
+                if (fs.existsSync($path.join(direntPath, ".devenvignore"))) {
+                    continue;
+                }
+
                 yield* crawlGitPath(direntPath, depth - 1);
             }
         }
