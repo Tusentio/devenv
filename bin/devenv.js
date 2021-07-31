@@ -310,11 +310,10 @@ async function start() {
                     })
             );
 
-            loglevel.info(`Started "${dir}".`);
+            loglevel.info(`\r\nStarted "${dir}".`);
         }
     }
 
-    loglevel.info();
     await Promise.allSettled(promises);
 
     console.groupEnd();
