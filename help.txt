@@ -24,7 +24,7 @@ devenv 1.0.0-pre.6
   Options:
 
     --default-pattern                           A regular expression that matches the names of default files. (Respects .gitignore)
-      Default: (?:\.|^)default(\.|$)|^sample-
+      Default: (?:\.|^)default(\.|$)
 
     --repos                                     The path to the repos.txt* file
       Default: ./repos.txt

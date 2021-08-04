@@ -25,7 +25,7 @@
         "help": "?"
     },
     "default": {
-        "default-pattern": "(?:\\.|^)default(\\.|$)|^sample-",
+        "default-pattern": "(?:\\.|^)default(\\.|$)",
         "depth": 9007199254740991,
         "repos": "repos.txt",
         "log-level": "info",
