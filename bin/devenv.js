@@ -310,7 +310,7 @@ async function start() {
                     })
             );
 
-            loglevel.info(`\r\nStarted "${dir}".`);
+            loglevel.info(`Started "${dir}".\r\n`);
         }
     }
 
