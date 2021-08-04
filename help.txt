@@ -1,5 +1,5 @@
 
-devenv 1.0.0-pre.6
+devenv 1.0.0-pre.7
 ------------------
 
   Usage: devenv [cmd] [options] [-- <args>]
