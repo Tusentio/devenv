@@ -107,17 +107,36 @@ async function cloneRepos() {
         return "";
     });
 
-    const repos = data.split(/\r?\n/).filter(Boolean);
+    const repos = data
+        .split(/\r?\n/)
+        .filter(Boolean)
+        .map((repo) => {
+            try {
+                const r = JSON.parse(repo);
+
+                if (Array.isArray(r)) {
+                    return r;
+                } else {
+                    return [r];
+                }
+            } catch {}
+
+            try {
+                return JSON.parse("[" + repo + "]");
+            } catch {}
+
+            return [repo];
+        });
 
     await Promise.allSettled(
         repos.map((repo) =>
             git
-                .clone(repo)
+                .clone(...repo)
                 .then(() => {
-                    loglevel.info(chalk.greenBright`✓ "${repo}"`);
+                    loglevel.info(chalk.greenBright`✓ "${repo[0]}"`);
                 })
                 .catch(() => {
-                    loglevel.info(`X "${repo}"`);
+                    loglevel.info(`X "${repo[0]}"`);
                 })
         )
     );
