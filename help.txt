@@ -42,6 +42,8 @@ devenv 1.0.0-pre.6
     --force-install                             Force npm to run on a package even if it's missing a package lock-file.
       -f
 
+    --standard-branch                           Do not attempt to clone the "dev" branch.
+
     --force-copy                                Copy default files even when overriding existing files.
       -F
 

@@ -112,7 +112,7 @@ async function cloneRepos() {
     await Promise.allSettled(
         repos.map((repo) =>
             git
-                .clone(repo)
+                .clone(repo, argv.mainBranch ? { "--branch": "dev" } : {})
                 .then(() => {
                     loglevel.info(chalk.greenBright`✓ "${repo}"`);
                 })

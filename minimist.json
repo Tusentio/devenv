@@ -9,7 +9,8 @@
         "force-copy",
         "clone",
         "install",
-        "configure"
+        "configure",
+        "main-branch"
     ],
     "alias": {
         "default-pattern": "defaultPattern",
@@ -20,6 +21,7 @@
         "clone": "c",
         "install": "i",
         "configure": ["C", "config"],
+        "main-branch": "mainBranch",
         "help": "?"
     },
     "default": {
@@ -31,6 +33,7 @@
         "force-copy": false,
         "clone": true,
         "install": true,
-        "configure": true
+        "configure": true,
+        "default-branch": false
     }
 }
