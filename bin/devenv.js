@@ -201,9 +201,11 @@ async function installConfigs() {
         if (match) {
             const dst = $path.join(dir, match);
 
-            if (fs.existsSync(dst)) {
+            // Continue if destination already exists
+            try {
+                await fs.promises.lstat(dst);
                 continue;
-            }
+            } catch {}
 
             promises.push(
                 fs.promises
