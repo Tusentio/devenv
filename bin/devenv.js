@@ -200,6 +200,7 @@ async function installConfigs() {
 
         if (match) {
             const dst = $path.join(dir, match);
+            const target = $path.resolve(file);
 
             // Continue if destination already exists
             try {
@@ -209,7 +210,7 @@ async function installConfigs() {
 
             promises.push(
                 fs.promises
-                    .symlink(file, dst)
+                    .symlink(target, dst, "file")
                     .then(() => {
                         loglevel.info(`Linked "${file}" through "${dst}".`);
                     })
