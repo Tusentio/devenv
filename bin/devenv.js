@@ -142,14 +142,8 @@ async function npmInstall() {
         }
 
         if (name === "package.json") {
-            if (!packages[dir]) {
-                packages[dir] = false;
-            }
-        } else if (name === "package-lock.json" || name === "npm-shrinkwrap.json") {
-            packages[dir] = true;
-
             promises.push(
-                exec("npm ci", {
+                exec("npm install --prefer-offline --no-audit", {
                     cwd: $path.resolve(dir),
                     shell: argv.shell || true,
                     windowsHide: true,
@@ -168,41 +162,8 @@ async function npmInstall() {
     await Promise.allSettled(promises);
     promises.splice(0);
 
-    if (argv.forceInstall) {
-        for (const [dir, installed] of Object.entries(packages)) {
-            if (!installed) {
-                packages[dir] = true;
-
-                promises.push(
-                    exec("npm install", {
-                        cwd: $path.resolve(dir),
-                        shell: argv.shell || true,
-                        windowsHide: true,
-                    })
-                        .then(() => {
-                            loglevel.info(chalk.greenBright`✓ "${dir}"`);
-                        })
-                        .catch(() => {
-                            loglevel.info(`X "${dir}"`);
-                            packages[dir] = false;
-                        })
-                );
-            }
-        }
-    }
-
-    await Promise.allSettled(promises);
-    promises.splice(0);
-
     if (Object.values(packages).some((installed) => !installed)) {
         loglevel.warn(chalk.yellowBright`\r\nSome packages could not be installed correctly.`);
-
-        if (!argv.forceInstall) {
-            loglevel.warn(
-                chalk.yellowBright`Use "--force-install" to install using package.json if a package is missing its lockfile.`
-            );
-        }
-
         loglevel.warn(chalk.yellowBright`\r\nThese are the affected packages:`);
         console.group();
 

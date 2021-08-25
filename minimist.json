@@ -1,12 +1,11 @@
 {
     "--": true,
     "string": ["default-pattern", "repos", "shell", "log-level"],
-    "boolean": ["help", "setup", "start", "force-install", "clone", "install", "configure"],
+    "boolean": ["help", "setup", "start", "clone", "install", "configure"],
     "alias": {
         "default-pattern": "defaultPattern",
         "depth": "d",
         "log-level": ["debug-level", "level"],
-        "force-install": ["f", "forceInstall"],
         "clone": "c",
         "install": "i",
         "configure": ["C", "config"],
@@ -17,7 +16,6 @@
         "depth": 9007199254740991,
         "repos": "repos.txt",
         "log-level": "info",
-        "force-install": false,
         "clone": true,
         "install": true,
         "configure": true
