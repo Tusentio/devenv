@@ -112,7 +112,7 @@ async function cloneRepos() {
     await Promise.allSettled(
         repos.map((repo) =>
             git
-                .clone(repo, argv.mainBranch ? { "--branch": "dev" } : {})
+                .clone(repo, { "--branch": "dev" })
                 .then(() => {
                     loglevel.info(chalk.greenBright`✓ "${repo}"`);
                 })
@@ -240,15 +240,15 @@ async function installConfigs() {
         if (match) {
             const dst = $path.join(dir, match);
 
-            if (!argv.forceCopy && fs.existsSync(dst)) {
+            if (fs.existsSync(dst)) {
                 continue;
             }
 
             promises.push(
                 fs.promises
-                    .copyFile(file, dst)
+                    .symlink(file, dst)
                     .then(() => {
-                        loglevel.info(`Copied "${file}" to "${dst}".`);
+                        loglevel.info(`Linked "${file}" through "${dst}".`);
                     })
                     .catch((err) => loglevel.error(chalk.redBright`${err}`))
             );

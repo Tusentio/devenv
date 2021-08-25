@@ -1,27 +1,15 @@
 {
     "--": true,
     "string": ["default-pattern", "repos", "shell", "log-level"],
-    "boolean": [
-        "help",
-        "setup",
-        "start",
-        "force-install",
-        "force-copy",
-        "clone",
-        "install",
-        "configure",
-        "main-branch"
-    ],
+    "boolean": ["help", "setup", "start", "force-install", "clone", "install", "configure"],
     "alias": {
         "default-pattern": "defaultPattern",
         "depth": "d",
         "log-level": ["debug-level", "level"],
         "force-install": ["f", "forceInstall"],
-        "force-copy": ["F", "forceCopy"],
         "clone": "c",
         "install": "i",
         "configure": ["C", "config"],
-        "main-branch": "mainBranch",
         "help": "?"
     },
     "default": {
@@ -30,10 +18,8 @@
         "repos": "repos.txt",
         "log-level": "info",
         "force-install": false,
-        "force-copy": false,
         "clone": true,
         "install": true,
-        "configure": true,
-        "default-branch": false
+        "configure": true
     }
 }
